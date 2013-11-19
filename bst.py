@@ -39,10 +39,10 @@ class Bst(object):
         if tree:
             yield tree[0]
             for i in self._values(tree[1]):
-                if i:
+                if i is not None:
                     yield i
             for i in self._values(tree[2]):
-                if i:
+                if i is not None:
                     yield i       
 
     def values(self):
