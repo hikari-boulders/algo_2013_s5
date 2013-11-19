@@ -1,7 +1,3 @@
-import sys
-
-w = sys.stdout.write
-
 class Bst(object):
     def __init__(self):
         self.root = []
