@@ -1,17 +1,42 @@
+class Node(object):
+    def __init__(self, data=None, succ=None, prec=None):
+        self.data=data
+        self.succ=succ
+        self.prec=prec
+
 class Queue(object):
     def __init__(self):
-        self.data = []
-    
+        root = Node()
+        root.succ = root
+        root.prec = root
+        self.root = root        
+
     def put(self, item):
-        self.data.append(item)
+        r = self.root
+        last = r.prec
+        node = Node(data=item)
+        node.succ = last.succ        
+        last.succ.prec=node
+        last.succ = node
+        node.prec = last
 
     def pop(self):
-        item = self.data[0]
-        del self.data[0]
-        return item
+        r = self.root
+        first = r.succ
+        if first != r:
+            node = first
+            first.prec.succ = first.succ
+            first.succ.prec = first.prec        
+            return node.data            
 
     def __len__(self):
-        return len(self.data)
+        i = 0
+        r = self.root
+        succ = r.succ
+        while succ != r:
+            i+=1
+            succ = succ.succ
+        return i
 
     @property
     def empty(self):
